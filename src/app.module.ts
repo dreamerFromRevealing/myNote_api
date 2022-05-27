@@ -17,7 +17,7 @@ const url = process.env.MONGO_URL || 'localhost';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(`mongodb+srv://admin:admin@cluster0.kyuxl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRoot({
       installSubscriptionHandlers: true,
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
