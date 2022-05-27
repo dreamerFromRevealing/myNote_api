@@ -9,6 +9,7 @@ import {PersonModule} from "./person/person.module";
 import { FolderModule } from './folder/folder.module';
 import { DocumentModule } from './document/document.module';
 import {Folder, FolderSchema} from "./folder/folder.model";
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 const url = process.env.MONGO_URL || 'localhost';
 
@@ -16,9 +17,10 @@ const url = process.env.MONGO_URL || 'localhost';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(`mongodb+srv://admin:admin@cluster0.kyuxl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       installSubscriptionHandlers: true,
       autoSchemaFile: 'schema.gql',
+      driver: ApolloDriver,
     }),
     MongooseModule.forFeature([{name: Folder.name, schema: FolderSchema}]),
     PersonModule,
