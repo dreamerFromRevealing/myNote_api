@@ -2,7 +2,7 @@ import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {Document} from "./document.model";
 import {DocumentService} from "./document.service";
 import {Schema as MongooseSchema} from 'mongoose';
-import {CreateDocumentInput, ListDocumentInput, UpdateDocumentInput} from "./document.inputs";
+import {ChangeParentIdInput, CreateDocumentInput, ListDocumentInput, UpdateDocumentInput} from "./document.inputs";
 
 @Resolver(() =>Document)
 export class DocumentResolver {
@@ -33,5 +33,10 @@ export class DocumentResolver {
     @Args('_id', {type: () => String}) _id: MongooseSchema.Types.ObjectId
   ) {
     return this.documentService.delete(_id)
+  }
+
+  @Mutation(() => Document)
+  async changeDocumentParent(@Args('payload') payload: ChangeParentIdInput) {
+    return this.documentService.changeParentId(payload)
   }
 }

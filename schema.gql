@@ -77,9 +77,11 @@ type Mutation {
   createFolder(payload: CreateFolderInput!): Folder!
   updateFolder(payload: UpdateFolderInput!): Folder!
   deleteFolder(_id: String!): Folder!
+  changeFolderParent(payload: ChangeParentIdInput!): Folder!
   createDocument(payload: CreateDocumentInput!): Document!
   updateDocument(payload: UpdateDocumentInput!): Document!
   deleteDocument(_id: String!): Document!
+  changeDocumentParent(payload: ChangeParentIdInput!): Document!
 }
 
 input CreatePersonInput {
@@ -113,6 +115,11 @@ input UpdateFolderInput {
   pathname: String
   childFoldersIds: String
   childDocsIds: String
+}
+
+input ChangeParentIdInput {
+  _id: String!
+  newParentId: String
 }
 
 input CreateDocumentInput {
