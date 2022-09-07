@@ -38,3 +38,13 @@ export class UpdateDocumentInput {
   @Field(() => String, {nullable: true})
   content?: string
 }
+
+
+@InputType()
+export class ChangeParentIdInput {
+  @Field(() => String)
+  _id: MongooseSchema.Types.ObjectId
+
+  @Field(() => String, {nullable: true})
+  newParentId?: MongooseSchema.Types.ObjectId
+}

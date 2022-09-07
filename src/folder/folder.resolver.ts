@@ -3,6 +3,7 @@ import {Folder} from "./folder.model";
 import {Schema as MongooseSchema} from 'mongoose';
 import {FolderService} from "./folder.service";
 import {CreateFolderInput, ListFolderInput, UpdateFolderInput} from "./folder.inputs";
+import {ChangeParentIdInput} from "../document/document.inputs";
 
 @Resolver(() => Folder)
 export class FolderResolver {
@@ -39,5 +40,8 @@ export class FolderResolver {
     return this.folderService.delete(_id)
   }
 
-
+  @Mutation(() => Folder)
+  async changeFolderParent(@Args('payload') payload: ChangeParentIdInput) {
+    return this.folderService.changeParentId(payload)
+  }
 }

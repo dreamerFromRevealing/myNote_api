@@ -1,12 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import {forwardRef, Inject, Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Document, DocumentDocument} from "./document.model";
 import {Model, Schema as MongooseSchema} from "mongoose";
-import {CreateDocumentInput, ListDocumentInput, UpdateDocumentInput} from "./document.inputs";
+import {ChangeParentIdInput, CreateDocumentInput, ListDocumentInput, UpdateDocumentInput} from "./document.inputs";
+import { FolderService } from 'src/folder/folder.service';
 
 @Injectable()
 export class DocumentService {
-  constructor(@InjectModel(Document.name) private  documentModel: Model<DocumentDocument>) {}
+  constructor(
+    @InjectModel(Document.name) private documentModel: Model<DocumentDocument>,
+    @Inject(forwardRef(() => FolderService))
+    private folderService: FolderService
+  ) {}
 
   create(payload: CreateDocumentInput) {
     const createdDocument = new this.documentModel({...payload, content: ''})
@@ -31,4 +36,14 @@ export class DocumentService {
     return this.documentModel.findByIdAndDelete(_id).exec()
   }
 
+  async changeParentId(payload: ChangeParentIdInput) {
+    if (!payload.newParentId) {
+      return this.documentModel.findByIdAndUpdate(payload._id, {parentFolderId: null, folderPathname: null}).exec()
+    }
+    const document = await this.documentModel.findById(payload._id).exec()
+    const newParent = await this.folderService.getById(payload.newParentId)
+    document.folderPathname = `${newParent?.pathname}`
+    document.parentFolderId = newParent._id
+    return document.save()
+  }
 }
