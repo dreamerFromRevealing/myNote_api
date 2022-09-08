@@ -7,7 +7,11 @@ export class CreateDocumentInput {
   title: string
 
   @Field(() => String)
-  parentFolderId: string}
+  parentFolderId: string
+
+  @Field(() => String)
+  typeFile: string
+}
 
 @InputType()
 export class ListDocumentInput {
@@ -22,6 +26,9 @@ export class ListDocumentInput {
 
   @Field(() => String, {nullable: true})
   content?: string
+
+  @Field(() => String, {nullable: true})
+  typeFile?: string
 }
 
 @InputType()
@@ -37,6 +44,9 @@ export class UpdateDocumentInput {
 
   @Field(() => String, {nullable: true})
   content?: string
+
+  @Field(() => String, {nullable: true})
+  typeFile?: string
 }
 
 

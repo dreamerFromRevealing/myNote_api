@@ -18,9 +18,12 @@ const url = process.env.MONGO_URL || 'localhost';
     ConfigModule.forRoot(),
     MongooseModule.forRoot(`mongodb+srv://admin:admin@cluster0.kyuxl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      installSubscriptionHandlers: true,
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
+      subscriptions: {
+        'graphql-ws': true,
+        'subscriptions-transport-ws': true,
+      },
     }),
     MongooseModule.forFeature([{name: Folder.name, schema: FolderSchema}]),
     PersonModule,

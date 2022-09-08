@@ -23,6 +23,10 @@ export class Document {
   @Field(() => String, { nullable: true })
   @Prop()
   content?: string
+
+  @Field(() => String, { nullable: true })
+  @Prop()
+  typeFile?: string
 }
 
 export type DocumentDocument = Document & MongoDocument
