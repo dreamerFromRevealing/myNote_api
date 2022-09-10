@@ -8,6 +8,7 @@ type Document {
   folderPathname: String
   parentFolderId: String
   content: String
+  typeFile: String
 }
 
 type Folder {
@@ -65,6 +66,7 @@ input ListDocumentInput {
   title: String
   folderPathname: String
   content: String
+  typeFile: String
 }
 
 type Mutation {
@@ -125,6 +127,7 @@ input ChangeParentIdInput {
 input CreateDocumentInput {
   title: String!
   parentFolderId: String!
+  typeFile: String!
 }
 
 input UpdateDocumentInput {
@@ -132,4 +135,5 @@ input UpdateDocumentInput {
   title: String
   folderPathname: String
   content: String
+  typeFile: String
 }
