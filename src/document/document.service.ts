@@ -9,8 +9,7 @@ import { FolderService } from 'src/folder/folder.service';
 export class DocumentService {
   constructor(
     @InjectModel(Document.name) private documentModel: Model<DocumentDocument>,
-    @Inject(forwardRef(() => FolderService))
-    private folderService: FolderService
+    @Inject(forwardRef(() => FolderService)) private folderService: FolderService
   ) {}
 
   create(payload: CreateDocumentInput) {

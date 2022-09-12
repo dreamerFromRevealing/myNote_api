@@ -10,6 +10,8 @@ import { FolderModule } from './folder/folder.module';
 import { DocumentModule } from './document/document.module';
 import {Folder, FolderSchema} from "./folder/folder.model";
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { WorkspaceModule } from './workspace/workspace.module';
+import {Document, DocumentSchema} from "./document/document.model";
 
 const url = process.env.MONGO_URL || 'localhost';
 
@@ -25,11 +27,13 @@ const url = process.env.MONGO_URL || 'localhost';
         'subscriptions-transport-ws': true,
       },
     }),
-    MongooseModule.forFeature([{name: Folder.name, schema: FolderSchema}]),
+    MongooseModule.forFeature([{name: Folder.name, schema: FolderSchema}, {name: Document.name, schema: DocumentSchema}]),
+    WorkspaceModule,
     PersonModule,
     HobbyModule,
     FolderModule,
     DocumentModule,
+    WorkspaceModule,
   ],
   controllers: [AppController],
   providers: [ AppService],
