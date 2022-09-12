@@ -6,8 +6,8 @@ export class CreateDocumentInput {
   @Field(() => String)
   title: string
 
-  @Field(() => String)
-  parentFolderId: string
+  @Field(() => String, {nullable: true})
+  parentFolderId?: string
 
   @Field(() => String)
   typeFile: string

@@ -34,8 +34,8 @@ export class WorkspaceResolver {
     return this.workspaceService.update(payload)
   }
 
-  @Mutation(() => Folder)
-  async deleteFolder(
+  @Mutation(() => Workspace)
+  async deleteWorkspace(
     @Args('_id', {type: () => String}) _id: MongooseSchema.Types.ObjectId
   ) {
     return this.workspaceService.delete(_id)

@@ -6,7 +6,7 @@ export class CreateFolderInput {
   @Field(() => String)
   title: string
 
-  @Field(() => String)
+  @Field(() => String, {nullable: true})
   parentFolderId?: MongooseSchema.Types.ObjectId
 
   @Field(() => String)

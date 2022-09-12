@@ -88,13 +88,14 @@ input ListHobbyInput {
 type Mutation {
   createWorkspace(payload: CreateWorkspaceInput!): Workspace!
   updateWorkspace(payload: UpdateWorkspaceInput!): Workspace!
-  deleteFolder(_id: String!): Folder!
+  deleteWorkspace(_id: String!): Workspace!
   createDocument(payload: CreateDocumentInput!): Document!
   updateDocument(payload: UpdateDocumentInput!): Document!
   deleteDocument(_id: String!): Document!
   changeDocumentParent(payload: ChangeParentIdInput!): Document!
   createFolder(payload: CreateFolderInput!): Folder!
   updateFolder(payload: UpdateFolderInput!): Folder!
+  deleteFolder(_id: String!): Folder!
   changeFolderParent(payload: ChangeParentIdInput!): Folder!
   createPerson(payload: CreatePersonInput!): Person!
   updatePerson(payload: UpdatePersonInput!): Person!
@@ -115,7 +116,7 @@ input UpdateWorkspaceInput {
 
 input CreateDocumentInput {
   title: String!
-  parentFolderId: String!
+  parentFolderId: String
   typeFile: String!
   parentWorkspaceId: String!
 }
@@ -136,7 +137,7 @@ input ChangeParentIdInput {
 
 input CreateFolderInput {
   title: String!
-  parentFolderId: String!
+  parentFolderId: String
   parentWorkspaceId: String!
 }
 
