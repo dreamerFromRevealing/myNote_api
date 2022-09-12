@@ -10,8 +10,7 @@ import {ChangeParentIdInput} from "../document/document.inputs";
 export class FolderService {
   constructor(
     @InjectModel(Folder.name) private folderModel: Model<FolderDocument>,
-    @Inject(forwardRef(() => DocumentService))
-    private documentService: DocumentService
+    @Inject(forwardRef(() => DocumentService)) private documentService: DocumentService
   ) {
   }
 

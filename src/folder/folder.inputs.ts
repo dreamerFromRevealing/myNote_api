@@ -7,7 +7,10 @@ export class CreateFolderInput {
   title: string
 
   @Field(() => String)
-  parentFolderId?: string
+  parentFolderId?: MongooseSchema.Types.ObjectId
+
+  @Field(() => String)
+  parentWorkspaceId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -23,6 +26,9 @@ export class ListFolderInput {
 
   @Field(() => String, {nullable: true})
   childFoldersIds?: MongooseSchema.Types.ObjectId[]
+
+  @Field(() => String, {nullable: true})
+  parentWorkspaceId?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
   childDocsIds?: MongooseSchema.Types.ObjectId[]
@@ -44,4 +50,7 @@ export class UpdateFolderInput {
 
   @Field(() => String, {nullable: true})
   childDocsIds?: MongooseSchema.Types.ObjectId[]
+
+  @Field(() => String, {nullable: true})
+  parentWorkspaceId?: MongooseSchema.Types.ObjectId
 }

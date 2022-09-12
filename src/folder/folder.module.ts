@@ -9,7 +9,6 @@ import {DocumentModule} from "../document/document.module";
   imports: [
     MongooseModule.forFeature([{name: Folder.name, schema: FolderSchema}]),
     forwardRef(() =>  DocumentModule)
-
   ],
   exports: [FolderService],
   providers: [FolderService, FolderResolver],
