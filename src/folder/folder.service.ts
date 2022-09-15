@@ -24,8 +24,8 @@ export class FolderService {
     return this.folderModel.findById(_id).exec()
   }
 
-  list(filters: ListFolderInput) {
-    return this.folderModel.find({...filters}).exec()
+ async list(filters: ListFolderInput) {
+   return await this.folderModel.find({...filters}).populate('childDocsIds').populate('childFoldersIds').exec()
   }
 
   update(payload: UpdateFolderInput) {

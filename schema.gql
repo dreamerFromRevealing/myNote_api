@@ -13,7 +13,7 @@ type Document {
   typeFile: String
   folderPathname: String
   parentWorkspaceId: Workspace
-  parentFolderId: String
+  parentFolderId: Folder
   content: String
 }
 

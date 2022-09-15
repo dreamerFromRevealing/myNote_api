@@ -28,11 +28,11 @@ export class Folder {
 
   @Field(() => [Folder], { nullable: 'itemsAndList' })
   @Prop({type: [MongooseSchema.Types.ObjectId], ref: Folder.name})
-  childFoldersIds?: MongooseSchema.Types.ObjectId[] | Folder[]
+  childFoldersIds?: Folder[]
 
   @Field(() => [Document], { nullable: 'itemsAndList' })
-  @Prop({type: [MongooseSchema.Types.ObjectId], ref: Document.name})
-  childDocsIds?: MongooseSchema.Types.ObjectId[] | Document[]
+  @Prop({type: [MongooseSchema.Types.ObjectId], ref: 'Document'})
+  childDocsIds?: MongooseSchema.Types.ObjectId | Document[]
 }
 
 export type FolderDocument = Folder & MongoDocument
