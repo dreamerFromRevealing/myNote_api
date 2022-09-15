@@ -83,6 +83,8 @@ type Query {
   todoBoxes(filters: ListTodoBoxInput): [TodoBox!]!
   todoBoard(_id: String!): TodoBoard!
   todoBoards(filters: ListTodoBoardInput): [TodoBoard!]!
+  todoCollection(_id: String!): TodoCollection!
+  todoCollections(filters: ListTodoCollectionInput): [TodoCollection!]!
 }
 
 input ListWorkspacesInput {
@@ -134,6 +136,14 @@ input ListTodoBoardInput {
   childrenTodoCollectionIds: String
 }
 
+input ListTodoCollectionInput {
+  _id: String
+  title: String
+  color: String
+  parentTodoBoardParentId: String
+  childrenTodoTaskIds: String
+}
+
 type Mutation {
   createWorkspace(payload: CreateWorkspaceInput!): Workspace!
   updateWorkspace(payload: UpdateWorkspaceInput!): Workspace!
@@ -158,6 +168,9 @@ type Mutation {
   createTodoBoard(payload: CreateTodoBoardInput!): TodoBoard!
   updateTodoBoard(payload: UpdateTodoBoardInput!): TodoBoard!
   deleteTodoBoard(_id: String!): TodoBoard!
+  createTodoCollection(payload: CreateTodoCollectionInput!): TodoCollection!
+  updateTodoCollection(payload: UpdateTodoCollectionInput!): TodoCollection!
+  deleteTodoCollection(_id: String!): TodoCollection!
 }
 
 input CreateWorkspaceInput {
@@ -249,4 +262,18 @@ input UpdateTodoBoardInput {
   title: String
   parentTodoBoxId: String
   childrenTodoCollectionIds: String
+}
+
+input CreateTodoCollectionInput {
+  title: String!
+  color: String
+  parentTodoBoardParentId: String!
+}
+
+input UpdateTodoCollectionInput {
+  _id: String!
+  title: String
+  color: String
+  parentTodoBoardParentId: String
+  childrenTodoTaskIds: String
 }
