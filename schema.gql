@@ -81,6 +81,8 @@ type Query {
   hobbies(filters: ListHobbyInput): [Hobby!]!
   todoBox(_id: String!): TodoBox!
   todoBoxes(filters: ListTodoBoxInput): [TodoBox!]!
+  todoBoard(_id: String!): TodoBoard!
+  todoBoards(filters: ListTodoBoardInput): [TodoBoard!]!
 }
 
 input ListWorkspacesInput {
@@ -125,6 +127,13 @@ input ListTodoBoxInput {
   childTodoBoardIds: String
 }
 
+input ListTodoBoardInput {
+  _id: String
+  title: String
+  parentTodoBoxId: String
+  childrenTodoCollectionIds: String
+}
+
 type Mutation {
   createWorkspace(payload: CreateWorkspaceInput!): Workspace!
   updateWorkspace(payload: UpdateWorkspaceInput!): Workspace!
@@ -146,6 +155,9 @@ type Mutation {
   createTodoBox(payload: CreateTodoBoxInput!): TodoBox!
   updateTodoBox(payload: UpdateTodoBoxInput!): TodoBox!
   deleteTodoBox(_id: String!): TodoBox!
+  createTodoBoard(payload: CreateTodoBoardInput!): TodoBoard!
+  updateTodoBoard(payload: UpdateTodoBoardInput!): TodoBoard!
+  deleteTodoBoard(_id: String!): TodoBoard!
 }
 
 input CreateWorkspaceInput {
@@ -225,4 +237,16 @@ input UpdateTodoBoxInput {
   parentWorkspaceId: String
   parentFolderId: String
   childTodoBoardIds: String
+}
+
+input CreateTodoBoardInput {
+  title: String!
+  parentTodoBoxId: String!
+}
+
+input UpdateTodoBoardInput {
+  _id: String!
+  title: String
+  parentTodoBoxId: String
+  childrenTodoCollectionIds: String
 }

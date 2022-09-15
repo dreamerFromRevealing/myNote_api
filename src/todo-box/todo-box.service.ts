@@ -6,8 +6,7 @@ import {CreateTodoBoxInput, ListTodoBoxInput, UpdateTodoBoxInput} from "./todo-b
 
 @Injectable()
 export class TodoBoxService {
-  constructor(@InjectModel(TodoBox.name) private todoBoxModel: Model<TodoBoxDocument>) {
-  }
+  constructor(@InjectModel(TodoBox.name) private todoBoxModel: Model<TodoBoxDocument>) {}
 
   create(payload: CreateTodoBoxInput) {
     const createdTodoBox = new this.todoBoxModel(payload)
