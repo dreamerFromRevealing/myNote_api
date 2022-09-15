@@ -12,6 +12,10 @@ import {Folder, FolderSchema} from "./folder/folder.model";
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { WorkspaceModule } from './workspace/workspace.module';
 import {Document, DocumentSchema} from "./document/document.model";
+import { TodoBoxModule } from './todo-box/todo-box.module';
+import { TodoBoardModule } from './todo-board/todo-board.module';
+import { TodoCollectionModule } from './todo-collection/todo-collection.module';
+import { TodoTaskModule } from './todo-task/todo-task.module';
 
 const url = process.env.MONGO_URL || 'localhost';
 
@@ -34,6 +38,10 @@ const url = process.env.MONGO_URL || 'localhost';
     FolderModule,
     DocumentModule,
     WorkspaceModule,
+    TodoBoxModule,
+    TodoBoardModule,
+    TodoCollectionModule,
+    TodoTaskModule,
   ],
   controllers: [AppController],
   providers: [ AppService],

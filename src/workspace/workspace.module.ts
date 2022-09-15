@@ -11,7 +11,6 @@ import {WorkspaceResolver} from './workspace.resolver';
     MongooseModule.forFeature([{name: Workspace.name, schema: WorkspaceSchema}]),
     forwardRef(() => DocumentModule),
     forwardRef(() => FolderModule)
-
   ],
   exports: [WorkspaceService],
   providers: [WorkspaceService, WorkspaceResolver]
