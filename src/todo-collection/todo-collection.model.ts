@@ -21,7 +21,7 @@ export class TodoCollection {
   color?: string
 
   @Field(() => TodoBoard)
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: TodoBoard.name})
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: 'TodoBoard'})
   parentTodoBoardParentId: MongooseSchema.Types.ObjectId | TodoBoard
 
   @Field(() => TodoTask)

@@ -21,7 +21,7 @@ export class TodoTask {
   description?: string
 
   @Field(() => TodoCollection)
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: TodoCollection.name})
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: 'TodoCollection'})
   parentTodoCollectionParentId: MongooseSchema.Types.ObjectId | TodoCollection
 
 }

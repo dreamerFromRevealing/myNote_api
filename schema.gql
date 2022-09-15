@@ -38,6 +38,36 @@ type Person {
   hobbies: [Hobby!]!
 }
 
+type TodoTask {
+  _id: String
+  title: String
+  description: String
+  parentTodoCollectionParentId: TodoCollection!
+}
+
+type TodoCollection {
+  _id: String
+  title: String
+  color: String
+  parentTodoBoardParentId: TodoBoard!
+  childrenTodoTaskIds: TodoTask!
+}
+
+type TodoBoard {
+  _id: String
+  title: String
+  parentTodoBoxId: TodoBox
+  childrenTodoCollectionIds: TodoCollection
+}
+
+type TodoBox {
+  _id: String
+  title: String
+  parentWorkspaceId: Workspace
+  parentFolderId: Folder
+  childTodoBoardIds: [TodoBoard]
+}
+
 type Query {
   workspace(_id: String!): Workspace!
   workspaces(filters: ListWorkspacesInput): [Workspace!]!
@@ -49,6 +79,8 @@ type Query {
   persons(filters: ListPersonInput): [Person!]!
   hobby(_id: String!): Hobby!
   hobbies(filters: ListHobbyInput): [Hobby!]!
+  todoBox(_id: String!): TodoBox!
+  todoBoxes(filters: ListTodoBoxInput): [TodoBox!]!
 }
 
 input ListWorkspacesInput {
@@ -85,6 +117,14 @@ input ListHobbyInput {
   name: String
 }
 
+input ListTodoBoxInput {
+  _id: String
+  title: String
+  parentWorkspaceId: String
+  parentFolderId: String
+  childTodoBoardIds: String
+}
+
 type Mutation {
   createWorkspace(payload: CreateWorkspaceInput!): Workspace!
   updateWorkspace(payload: UpdateWorkspaceInput!): Workspace!
@@ -103,6 +143,9 @@ type Mutation {
   createHobby(payload: CreateHobbyInput!): Hobby!
   updateHobby(payload: UpdateHobbyInput!): Hobby!
   deleteHobby(_id: String!): Hobby!
+  createTodoBox(payload: CreateTodoBoxInput!): TodoBox!
+  updateTodoBox(payload: UpdateTodoBoxInput!): TodoBox!
+  deleteTodoBox(_id: String!): TodoBox!
 }
 
 input CreateWorkspaceInput {
@@ -168,4 +211,18 @@ input CreateHobbyInput {
 input UpdateHobbyInput {
   _id: String!
   name: String
+}
+
+input CreateTodoBoxInput {
+  title: String!
+  parentFolderId: String
+  parentWorkspaceId: String!
+}
+
+input UpdateTodoBoxInput {
+  _id: String!
+  title: String
+  parentWorkspaceId: String
+  parentFolderId: String
+  childTodoBoardIds: String
 }

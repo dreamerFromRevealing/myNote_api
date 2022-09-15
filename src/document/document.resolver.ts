@@ -4,7 +4,7 @@ import {DocumentService} from "./document.service";
 import {Schema as MongooseSchema} from 'mongoose';
 import {ChangeParentIdInput, CreateDocumentInput, ListDocumentInput, UpdateDocumentInput} from "./document.inputs";
 
-@Resolver(() =>Document)
+@Resolver(() => Document)
 export class DocumentResolver {
   constructor(private documentService: DocumentService) {}
 

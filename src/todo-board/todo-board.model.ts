@@ -15,7 +15,7 @@ export class TodoBoard {
   title?: string
 
   @Field(() => TodoBox, {nullable: true})
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: TodoBox.name})
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: 'TodoBox'})
   parentTodoBoxId?: MongooseSchema.Types.ObjectId | TodoBox
 
   @Field(() => TodoCollection, {nullable: true})
