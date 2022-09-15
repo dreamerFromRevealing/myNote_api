@@ -22,7 +22,7 @@ export class TodoTask {
 
   @Field(() => TodoCollection)
   @Prop({type: MongooseSchema.Types.ObjectId, ref: 'TodoCollection'})
-  parentTodoCollectionParentId: MongooseSchema.Types.ObjectId | TodoCollection
+  parentTodoCollectionId: MongooseSchema.Types.ObjectId | TodoCollection
 
 }
 
