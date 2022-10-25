@@ -10,9 +10,6 @@ export class CreateDocumentInput {
   parentFolderId?: string
 
   @Field(() => String)
-  typeFile: string
-
-  @Field(() => String)
   parentWorkspaceId: MongooseSchema.Types.ObjectId
 }
 
@@ -31,9 +28,6 @@ export class ListDocumentInput {
   content?: string
 
   @Field(() => String, {nullable: true})
-  typeFile?: string
-
-  @Field(() => String, {nullable: true})
   parentWorkspaceId?: MongooseSchema.Types.ObjectId
 }
 
@@ -50,9 +44,6 @@ export class UpdateDocumentInput {
 
   @Field(() => String, {nullable: true})
   content?: string
-
-  @Field(() => String, {nullable: true})
-  typeFile?: string
 
   @Field(() => String, {nullable: true})
   parentWorkspaceId?: MongooseSchema.Types.ObjectId

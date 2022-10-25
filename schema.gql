@@ -10,7 +10,6 @@ type Workspace {
 type Document {
   _id: String
   title: String
-  typeFile: String
   folderPathname: String
   parentWorkspaceId: Workspace
   parentFolderId: Folder
@@ -99,7 +98,6 @@ input ListDocumentInput {
   title: String
   folderPathname: String
   content: String
-  typeFile: String
   parentWorkspaceId: String
 }
 
@@ -197,7 +195,6 @@ input UpdateWorkspaceInput {
 input CreateDocumentInput {
   title: String!
   parentFolderId: String
-  typeFile: String!
   parentWorkspaceId: String!
 }
 
@@ -206,7 +203,6 @@ input UpdateDocumentInput {
   title: String
   folderPathname: String
   content: String
-  typeFile: String
   parentWorkspaceId: String
 }
 

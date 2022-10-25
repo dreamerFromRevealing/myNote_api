@@ -16,10 +16,6 @@ export class Document {
 
   @Field(() => String, { nullable: true })
   @Prop()
-  typeFile?: string
-
-  @Field(() => String, { nullable: true })
-  @Prop()
   folderPathname?: string
 
   @Field(() => Workspace, {nullable: true})
