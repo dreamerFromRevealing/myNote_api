@@ -22,7 +22,7 @@ const url = process.env.MONGO_URL || 'localhost';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(`mongodb+srv://admin:admin@cluster0.kyuxl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
+    MongooseModule.forRoot(`mongodb://db:27017/MyNote`),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
