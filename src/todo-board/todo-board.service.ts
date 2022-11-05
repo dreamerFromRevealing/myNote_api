@@ -1,15 +1,26 @@
-import {Injectable} from '@nestjs/common';
+import {forwardRef, Inject, Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {TodoBoard, TodoBoardDocument} from "./todo-board.model";
 import {CreateTodoBoardInput, ListTodoBoardInput, UpdateTodoBoardInput} from "./todo-board.inputs";
 import {Model, Schema as MongooseSchema} from "mongoose";
+import {TodoBoxService} from "../todo-box/todo-box.service";
 
 @Injectable()
 export class TodoBoardService {
-  constructor(@InjectModel(TodoBoard.name) private todoBoardModel: Model<TodoBoardDocument>) {}
+  constructor(
+    @InjectModel(TodoBoard.name) private todoBoardModel: Model<TodoBoardDocument>,
+    @Inject(forwardRef(() => TodoBoxService)) private todoBoxService: TodoBoxService
+  ) {
+  }
 
-  create(payload: CreateTodoBoardInput) {
-    const createdTodoBoard = new this.todoBoardModel(payload)
+  async create(payload: CreateTodoBoardInput) {
+    const todoBox = await this.todoBoxService.getById(payload.parentTodoBoxId)
+    const createdTodoBoard = await new this.todoBoardModel({
+      ...payload,
+      parentWorkspaceId: todoBox.parentWorkspaceId
+    })
+    todoBox.childTodoBoardIds.push(createdTodoBoard._id)
+    await todoBox.save()
     return createdTodoBoard.save()
   }
 

@@ -25,7 +25,7 @@ export class TodoBox {
 
   @Field(() => [TodoBoard], { nullable: 'itemsAndList' })
   @Prop({type: [MongooseSchema.Types.ObjectId], ref: TodoBoard.name})
-  childTodoBoardIds?: MongooseSchema.Types.ObjectId | TodoBoard[]
+  childTodoBoardIds?: MongooseSchema.Types.ObjectId[] | TodoBoard[]
 }
 
 export type TodoBoxDocument = TodoBox & MongoDocument

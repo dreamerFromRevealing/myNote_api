@@ -11,6 +11,7 @@ import {TodoBoardModule} from "../todo-board/todo-board.module";
     MongooseModule.forFeature([{name: TodoBox.name, schema: TodoBoxSchema}, {name: TodoBoard.name, schema: TodoBoardSchema}]),
     forwardRef(() =>  TodoBoardModule)
   ],
+  exports: [TodoBoxService],
   providers: [TodoBoxService, TodoBoxResolver],
 })
 export class TodoBoxModule {}

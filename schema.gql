@@ -55,6 +55,7 @@ type TodoCollection {
 type TodoBoard {
   _id: String
   title: String
+  parentWorkspaceId: Workspace
   parentTodoBoxId: TodoBox
   childrenTodoCollectionIds: TodoCollection
 }
