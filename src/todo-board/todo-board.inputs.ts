@@ -23,6 +23,9 @@ export class ListTodoBoardInput {
 
   @Field(() => String, {nullable: true})
   childrenTodoCollectionIds?: MongooseSchema.Types.ObjectId
+
+  @Field(() => String, {nullable: true})
+  parentWorkspaceId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -38,4 +41,7 @@ export class UpdateTodoBoardInput {
 
   @Field(() => String, {nullable: true})
   childrenTodoCollectionIds?: MongooseSchema.Types.ObjectId
+
+  @Field(() => String, {nullable: true})
+  parentWorkspaceId?: MongooseSchema.Types.ObjectId
 }
