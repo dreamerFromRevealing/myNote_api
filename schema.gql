@@ -135,6 +135,7 @@ input ListTodoBoardInput {
   title: String
   parentTodoBoxId: String
   childrenTodoCollectionIds: String
+  parentWorkspaceId: String
 }
 
 input ListTodoCollectionInput {
@@ -271,6 +272,7 @@ input UpdateTodoBoardInput {
   title: String
   parentTodoBoxId: String
   childrenTodoCollectionIds: String
+  parentWorkspaceId: String
 }
 
 input CreateTodoCollectionInput {
