@@ -24,7 +24,7 @@ export class TodoCollection {
   @Prop({type: MongooseSchema.Types.ObjectId, ref: 'TodoBoard'})
   parentTodoBoardParentId: MongooseSchema.Types.ObjectId | TodoBoard
 
-  @Field(() => TodoTask)
+  @Field(() => TodoTask, {nullable: true})
   @Prop({type: MongooseSchema.Types.ObjectId, ref: TodoTask.name})
   childrenTodoTaskIds: MongooseSchema.Types.ObjectId[] | TodoTask[]
 
