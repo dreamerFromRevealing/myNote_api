@@ -17,12 +17,12 @@ import { TodoBoardModule } from './todo-board/todo-board.module';
 import { TodoCollectionModule } from './todo-collection/todo-collection.module';
 import { TodoTaskModule } from './todo-task/todo-task.module';
 
-const url = process.env.MONGO_URL || 'localhost';
-
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    MongooseModule.forRoot(`mongodb://db:27017/MyNote`),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(process.env.MONGODB_URL || 'mongodb://localhost:27017/mynote'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
