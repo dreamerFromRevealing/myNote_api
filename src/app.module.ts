@@ -22,7 +22,7 @@ import { TodoTaskModule } from './todo-task/todo-task.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MONGODB_URL || 'mongodb://localhost:27017/mynote'),
+    MongooseModule.forRoot(process.env.MONGODB_URL || 'mongodb://db:27017/MyNote'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
