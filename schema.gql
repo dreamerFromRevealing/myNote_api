@@ -48,6 +48,7 @@ type TodoCollection {
   _id: String
   title: String
   color: String
+  position: String!
   parentTodoBoardParentId: TodoBoard!
   childrenTodoTaskIds: TodoTask
 }
@@ -142,6 +143,7 @@ input ListTodoCollectionInput {
   _id: String
   title: String
   color: String
+  position: Float
   parentTodoBoardParentId: String
   childrenTodoTaskIds: String
 }
@@ -278,6 +280,7 @@ input UpdateTodoBoardInput {
 input CreateTodoCollectionInput {
   title: String!
   color: String
+  position: Float!
   parentTodoBoardParentId: String!
 }
 
@@ -285,6 +288,7 @@ input UpdateTodoCollectionInput {
   _id: String!
   title: String
   color: String
+  position: Float
   parentTodoBoardParentId: String
   childrenTodoTaskIds: String
 }

@@ -18,6 +18,10 @@ export class TodoCollection {
   @Prop()
   color?: string
 
+  @Field(() => String)
+  @Prop()
+  position: number
+
   @Field(() => TodoBoard)
   @Prop({type: MongooseSchema.Types.ObjectId, ref: 'TodoBoard'})
   parentTodoBoardParentId: MongooseSchema.Types.ObjectId | TodoBoard

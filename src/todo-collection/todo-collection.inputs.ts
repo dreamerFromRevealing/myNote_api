@@ -9,6 +9,9 @@ export class CreateTodoCollectionInput {
   @Field(() => String, {nullable: true})
   color?: string
 
+  @Field(() => Number)
+  position: number
+
   @Field(() => String)
   parentTodoBoardParentId: MongooseSchema.Types.ObjectId
 }
@@ -23,6 +26,9 @@ export class ListTodoCollectionInput {
 
   @Field(() => String, {nullable: true})
   color?: string
+
+  @Field(() => Number, {nullable: true})
+  position?: number
 
   @Field(() => String, {nullable: true})
   parentTodoBoardParentId?: MongooseSchema.Types.ObjectId
@@ -41,6 +47,9 @@ export class UpdateTodoCollectionInput {
 
   @Field(() => String, {nullable: true})
   color?: string
+
+  @Field(() => Number, {nullable: true})
+  position?: number
 
   @Field(() => String, {nullable: true})
   parentTodoBoardParentId?: MongooseSchema.Types.ObjectId
