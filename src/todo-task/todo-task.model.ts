@@ -16,6 +16,10 @@ export class TodoTask {
   @Prop()
   title?: string
 
+  @Field(() => Number, {nullable: true})
+  @Prop()
+  position?: number
+
   @Field(() => String, {nullable: true})
   @Prop()
   description?: string

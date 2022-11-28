@@ -40,6 +40,7 @@ type Person {
 type TodoTask {
   _id: String
   title: String
+  position: Float
   description: String
   parentTodoCollectionId: TodoCollection!
 }
@@ -152,6 +153,7 @@ input ListTodoTaskInput {
   _id: String
   title: String
   description: String
+  position: Float
   parentTodoCollectionId: String
 }
 
@@ -295,7 +297,8 @@ input UpdateTodoCollectionInput {
 
 input CreateTodoTaskInput {
   title: String!
-  description: String!
+  position: Float!
+  description: String
   parentTodoCollectionId: String!
 }
 
@@ -303,5 +306,6 @@ input UpdateTodoTaskInput {
   _id: String!
   title: String
   description: String
+  position: Float
   parentTodoCollectionId: String
 }

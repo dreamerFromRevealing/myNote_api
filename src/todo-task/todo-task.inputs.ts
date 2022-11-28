@@ -6,8 +6,11 @@ export class CreateTodoTaskInput {
   @Field(() => String)
   title: string
 
-  @Field(() => String)
-  description: string
+  @Field(() => Number)
+  position: number
+
+  @Field(() => String, {nullable: true})
+  description?: string
 
   @Field(() => String)
   parentTodoCollectionId: MongooseSchema.Types.ObjectId
@@ -24,6 +27,9 @@ export class ListTodoTaskInput {
   @Field(() => String, {nullable: true})
   description?: string
 
+  @Field(() => Number, {nullable: true})
+  position?: number
+
   @Field(() => String, {nullable: true})
   parentTodoCollectionId?: MongooseSchema.Types.ObjectId
 }
@@ -38,6 +44,9 @@ export class UpdateTodoTaskInput {
 
   @Field(() => String, {nullable: true})
   description?: string
+
+  @Field(() => Number, {nullable: true})
+  position?: number
 
   @Field(() => String, {nullable: true})
   parentTodoCollectionId?: MongooseSchema.Types.ObjectId
