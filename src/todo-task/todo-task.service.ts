@@ -17,8 +17,9 @@ export class TodoTaskService {
     return this.todoTaskModel.findById(_id).exec()
   }
 
-  list(filters: ListTodoTaskInput) {
-    return this.todoTaskModel.find({...filters}).exec()
+  async list(filters: ListTodoTaskInput) {
+    const data = await this.todoTaskModel.find({...filters}).exec()
+    return data.sort((a, b) => a.position - b.position)
   }
 
   update(payload: UpdateTodoTaskInput) {

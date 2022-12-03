@@ -51,3 +51,8 @@ export class UpdateTodoTaskInput {
   @Field(() => String, {nullable: true})
   parentTodoCollectionId?: MongooseSchema.Types.ObjectId
 }
+
+@InputType()
+export class UpdatePositionTodoTaskInput {
+
+}

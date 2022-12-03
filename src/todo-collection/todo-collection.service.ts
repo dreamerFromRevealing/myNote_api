@@ -25,8 +25,7 @@ export class TodoCollectionService {
 
   async list(filters: ListTodoCollectionInput) {
     const data = await this.todoCollectionModel.find({...filters}).exec()
-    const parseData = data.sort((a, b) => a.position - b.position)
-    return parseData
+    return data.sort((a, b) => a.position - b.position)
   }
 
   update(payload: UpdateTodoCollectionInput) {
