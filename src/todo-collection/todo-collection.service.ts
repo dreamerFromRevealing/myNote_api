@@ -2,11 +2,17 @@ import {Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Model, Schema as MongooseSchema} from "mongoose";
 import {TodoCollection, TodoCollectionDocument} from "./todo-collection.model";
-import {CreateTodoCollectionInput, ListTodoCollectionInput, UpdateTodoCollectionInput} from "./todo-collection.inputs";
+import {
+  CreateTodoCollectionInput,
+  ListTodoCollectionInput,
+  UpdatePositionTodoCollectionInput,
+  UpdateTodoCollectionInput
+} from "./todo-collection.inputs";
 
 @Injectable()
 export class TodoCollectionService {
-  constructor(@InjectModel(TodoCollection.name) private todoCollectionModel: Model<TodoCollectionDocument>) {}
+  constructor(@InjectModel(TodoCollection.name) private todoCollectionModel: Model<TodoCollectionDocument>) {
+  }
 
   create(payload: CreateTodoCollectionInput) {
     const createdTodoCollection = new this.todoCollectionModel(payload)
@@ -17,8 +23,10 @@ export class TodoCollectionService {
     return this.todoCollectionModel.findById(_id).exec()
   }
 
-  list(filters: ListTodoCollectionInput) {
-    return this.todoCollectionModel.find({...filters}).exec()
+  async list(filters: ListTodoCollectionInput) {
+    const data = await this.todoCollectionModel.find({...filters}).exec()
+    const parseData = data.sort((a, b) => a.position - b.position)
+    return parseData
   }
 
   update(payload: UpdateTodoCollectionInput) {
@@ -29,5 +37,17 @@ export class TodoCollectionService {
 
   delete(_id: MongooseSchema.Types.ObjectId) {
     return this.todoCollectionModel.findByIdAndDelete(_id).exec()
+  }
+
+  updatePosition(payload: UpdatePositionTodoCollectionInput) {
+    this.todoCollectionModel
+      .findByIdAndUpdate(payload.firstId, {position: payload.firstPosition}, {new: true})
+      .exec()
+
+    this.todoCollectionModel
+      .findByIdAndUpdate(payload.secondId, {position: payload.secondPosition}, {new: true})
+      .exec()
+
+    return true
   }
 }

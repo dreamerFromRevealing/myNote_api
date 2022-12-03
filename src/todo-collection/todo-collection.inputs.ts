@@ -58,3 +58,17 @@ export class UpdateTodoCollectionInput {
   childrenTodoTaskIds?: MongooseSchema.Types.ObjectId
 }
 
+@InputType()
+export class UpdatePositionTodoCollectionInput {
+  @Field(() => String)
+  firstId: MongooseSchema.Types.ObjectId
+
+  @Field(() => String)
+  secondId: MongooseSchema.Types.ObjectId
+
+  @Field(() => Number)
+  firstPosition: number
+
+  @Field(() => Number)
+  secondPosition: number
+}

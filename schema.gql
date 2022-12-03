@@ -184,6 +184,7 @@ type Mutation {
   createTodoCollection(payload: CreateTodoCollectionInput!): TodoCollection!
   updateTodoCollection(payload: UpdateTodoCollectionInput!): TodoCollection!
   deleteTodoCollection(_id: String!): TodoCollection!
+  updatePositionTodoCollection(payload: UpdatePositionTodoCollectionInput!): Boolean!
   createTodoTask(payload: CreateTodoTaskInput!): TodoTask!
   updateTodoTask(payload: UpdateTodoTaskInput!): TodoTask!
   deleteTodoTask(_id: String!): TodoTask!
@@ -293,6 +294,13 @@ input UpdateTodoCollectionInput {
   position: Float
   parentTodoBoardParentId: String
   childrenTodoTaskIds: String
+}
+
+input UpdatePositionTodoCollectionInput {
+  firstId: String!
+  secondId: String!
+  firstPosition: Float!
+  secondPosition: Float!
 }
 
 input CreateTodoTaskInput {

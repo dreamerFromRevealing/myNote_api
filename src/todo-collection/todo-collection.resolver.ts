@@ -2,7 +2,12 @@ import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {TodoCollection} from "./todo-collection.model";
 import {TodoCollectionService} from "./todo-collection.service";
 import {Schema as MongooseSchema} from 'mongoose';
-import {CreateTodoCollectionInput, ListTodoCollectionInput, UpdateTodoCollectionInput} from "./todo-collection.inputs";
+import {
+  CreateTodoCollectionInput,
+  ListTodoCollectionInput,
+  UpdatePositionTodoCollectionInput,
+  UpdateTodoCollectionInput
+} from "./todo-collection.inputs";
 
 @Resolver(() => TodoCollection)
 export class TodoCollectionResolver {
@@ -35,4 +40,8 @@ export class TodoCollectionResolver {
     return this.todoCollectionService.delete(_id)
   }
 
+  @Mutation(() => Boolean)
+  async updatePositionTodoCollection(@Args('payload') payload: UpdatePositionTodoCollectionInput) {
+    return this.todoCollectionService.updatePosition(payload)
+  }
 }
