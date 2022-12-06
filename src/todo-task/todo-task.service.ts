@@ -2,7 +2,12 @@ import {Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Model, Schema as MongooseSchema} from "mongoose";
 import {TodoTask, TodoTaskDocument} from "./todo-task.model";
-import {CreateTodoTaskInput, ListTodoTaskInput, UpdateTodoTaskInput} from "./todo-task.inputs";
+import {
+  CreateTodoTaskInput,
+  ListTodoTaskInput,
+  UpdatePositionArrTodoTasksInput,
+  UpdateTodoTaskInput
+} from "./todo-task.inputs";
 
 @Injectable()
 export class TodoTaskService {
@@ -30,5 +35,13 @@ export class TodoTaskService {
 
   delete(_id: MongooseSchema.Types.ObjectId) {
     return this.todoTaskModel.findByIdAndDelete(_id).exec()
+  }
+
+  updatePosition(payload: UpdatePositionArrTodoTasksInput) {
+    return payload.todoTasks.map(async (task: UpdateTodoTaskInput) => {
+      return this.todoTaskModel
+        .findByIdAndUpdate(task._id, task, {new: true})
+        .exec()
+    })
   }
 }

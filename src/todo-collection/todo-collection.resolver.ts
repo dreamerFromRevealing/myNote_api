@@ -4,7 +4,7 @@ import {TodoCollectionService} from "./todo-collection.service";
 import {Schema as MongooseSchema} from 'mongoose';
 import {
   CreateTodoCollectionInput,
-  ListTodoCollectionInput,
+  ListTodoCollectionInput, UpdatePositionArrTodoCollectionsInput,
   UpdatePositionTodoCollectionInput,
   UpdateTodoCollectionInput
 } from "./todo-collection.inputs";
@@ -40,8 +40,8 @@ export class TodoCollectionResolver {
     return this.todoCollectionService.delete(_id)
   }
 
-  @Mutation(() => Boolean)
-  async updatePositionTodoCollection(@Args('payload') payload: UpdatePositionTodoCollectionInput) {
+  @Mutation(() => [TodoCollection])
+  async updatePositionTodoCollection(@Args('payload') payload: UpdatePositionArrTodoCollectionsInput) {
     return this.todoCollectionService.updatePosition(payload)
   }
 }

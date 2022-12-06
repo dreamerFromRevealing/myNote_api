@@ -184,10 +184,11 @@ type Mutation {
   createTodoCollection(payload: CreateTodoCollectionInput!): TodoCollection!
   updateTodoCollection(payload: UpdateTodoCollectionInput!): TodoCollection!
   deleteTodoCollection(_id: String!): TodoCollection!
-  updatePositionTodoCollection(payload: UpdatePositionTodoCollectionInput!): Boolean!
+  updatePositionTodoCollection(payload: UpdatePositionArrTodoCollectionsInput!): [TodoCollection!]!
   createTodoTask(payload: CreateTodoTaskInput!): TodoTask!
   updateTodoTask(payload: UpdateTodoTaskInput!): TodoTask!
   deleteTodoTask(_id: String!): TodoTask!
+  updatePositionTodoTask(payload: UpdatePositionArrTodoTasksInput!): [TodoTask!]!
 }
 
 input CreateWorkspaceInput {
@@ -296,11 +297,13 @@ input UpdateTodoCollectionInput {
   childrenTodoTaskIds: String
 }
 
+input UpdatePositionArrTodoCollectionsInput {
+  arrCollections: [UpdatePositionTodoCollectionInput!]!
+}
+
 input UpdatePositionTodoCollectionInput {
-  firstId: String!
-  secondId: String!
-  firstPosition: Float!
-  secondPosition: Float!
+  _id: String!
+  position: Float!
 }
 
 input CreateTodoTaskInput {
@@ -315,5 +318,15 @@ input UpdateTodoTaskInput {
   title: String
   description: String
   position: Float
+  parentTodoCollectionId: String
+}
+
+input UpdatePositionArrTodoTasksInput {
+  todoTasks: [UpdatePositionTodoTaskInput!]!
+}
+
+input UpdatePositionTodoTaskInput {
+  _id: String!
+  position: Float!
   parentTodoCollectionId: String
 }

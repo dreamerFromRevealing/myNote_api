@@ -4,10 +4,11 @@ import {Model, Schema as MongooseSchema} from "mongoose";
 import {TodoCollection, TodoCollectionDocument} from "./todo-collection.model";
 import {
   CreateTodoCollectionInput,
-  ListTodoCollectionInput,
+  ListTodoCollectionInput, UpdatePositionArrTodoCollectionsInput,
   UpdatePositionTodoCollectionInput,
   UpdateTodoCollectionInput
 } from "./todo-collection.inputs";
+import {UpdateTODOCollectionPositionDto} from "./dto/update-position.dto";
 
 @Injectable()
 export class TodoCollectionService {
@@ -38,15 +39,11 @@ export class TodoCollectionService {
     return this.todoCollectionModel.findByIdAndDelete(_id).exec()
   }
 
-  updatePosition(payload: UpdatePositionTodoCollectionInput) {
-    this.todoCollectionModel
-      .findByIdAndUpdate(payload.firstId, {position: payload.firstPosition}, {new: true})
-      .exec()
-
-    this.todoCollectionModel
-      .findByIdAndUpdate(payload.secondId, {position: payload.secondPosition}, {new: true})
-      .exec()
-
-    return true
+  updatePosition(payload: UpdatePositionArrTodoCollectionsInput) {
+   return payload.arrCollections.map(async (collection: UpdatePositionTodoCollectionInput) => {
+      return this.todoCollectionModel
+        .findByIdAndUpdate(collection._id, collection, {new: true})
+        .exec()
+    })
   }
 }

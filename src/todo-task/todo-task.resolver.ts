@@ -2,7 +2,12 @@ import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {TodoTask} from "./todo-task.model";
 import {TodoTaskService} from "./todo-task.service";
 import {Schema as MongooseSchema} from 'mongoose';
-import {CreateTodoTaskInput, ListTodoTaskInput, UpdateTodoTaskInput} from "./todo-task.inputs";
+import {
+  CreateTodoTaskInput,
+  ListTodoTaskInput,
+  UpdatePositionArrTodoTasksInput,
+  UpdateTodoTaskInput
+} from "./todo-task.inputs";
 
 @Resolver(() => TodoTask)
 export class TodoTaskResolver {
@@ -33,5 +38,10 @@ export class TodoTaskResolver {
     @Args('_id', {type: () => String}) _id: MongooseSchema.Types.ObjectId
   ) {
     return this.todoTaskService.delete(_id)
+  }
+
+  @Mutation(() => [TodoTask])
+  async updatePositionTodoTask(@Args('payload') payload: UpdatePositionArrTodoTasksInput) {
+    return this.todoTaskService.updatePosition(payload)
   }
 }

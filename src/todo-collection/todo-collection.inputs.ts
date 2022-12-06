@@ -61,14 +61,15 @@ export class UpdateTodoCollectionInput {
 @InputType()
 export class UpdatePositionTodoCollectionInput {
   @Field(() => String)
-  firstId: MongooseSchema.Types.ObjectId
-
-  @Field(() => String)
-  secondId: MongooseSchema.Types.ObjectId
+  _id: MongooseSchema.Types.ObjectId
 
   @Field(() => Number)
-  firstPosition: number
-
-  @Field(() => Number)
-  secondPosition: number
+  position: number
 }
+
+@InputType()
+export class UpdatePositionArrTodoCollectionsInput {
+  @Field(() => [UpdatePositionTodoCollectionInput])
+  arrCollections: [UpdatePositionTodoCollectionInput]
+}
+
