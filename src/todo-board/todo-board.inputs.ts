@@ -1,20 +1,17 @@
 import {Field, InputType} from "@nestjs/graphql";
-import {Schema as MongooseSchema} from 'mongoose';
+import {Schema as MongooseSchema} from "mongoose";
 
 @InputType()
-export class CreateDocumentInput {
+export class CreateTodoBoardInput {
   @Field(() => String)
   title: string
 
-  @Field(() => String, {nullable: true})
-  parentFolderId?: string
-
   @Field(() => String)
-  parentWorkspaceId: MongooseSchema.Types.ObjectId
+  parentTodoBoxId: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
-export class ListDocumentInput {
+export class ListTodoBoardInput {
   @Field(() => String, {nullable: true})
   _id?: MongooseSchema.Types.ObjectId
 
@@ -22,17 +19,17 @@ export class ListDocumentInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  folderPathname?: string
+  parentTodoBoxId?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
-  content?: string
+  childrenTodoCollectionIds?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
   parentWorkspaceId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
-export class UpdateDocumentInput {
+export class UpdateTodoBoardInput {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId
 
@@ -40,21 +37,11 @@ export class UpdateDocumentInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  folderPathname?: string
+  parentTodoBoxId?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
-  content?: string
+  childrenTodoCollectionIds?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
   parentWorkspaceId?: MongooseSchema.Types.ObjectId
-}
-
-
-@InputType()
-export class ChangeParentIdInput {
-  @Field(() => String)
-  _id: MongooseSchema.Types.ObjectId
-
-  @Field(() => String, {nullable: true})
-  newParentId?: MongooseSchema.Types.ObjectId
 }

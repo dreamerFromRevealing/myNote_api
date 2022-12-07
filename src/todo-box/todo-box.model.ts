@@ -1,12 +1,13 @@
 import {Field, ObjectType} from "@nestjs/graphql";
 import {Document as MongoDocument, Schema as MongooseSchema} from 'mongoose';
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {Document} from "../document/document.model";
 import {Workspace} from "../workspace/workspace.model";
+import {Folder} from "../folder/folder.model";
+import {TodoBoard} from "../todo-board/todo-board.model";
 
 @ObjectType()
 @Schema()
-export class Folder {
+export class TodoBox {
   @Field(() => String, {nullable: true})
   _id?: MongooseSchema.Types.ObjectId
 
@@ -14,27 +15,19 @@ export class Folder {
   @Prop()
   title?: string
 
-  @Field(() => String, {nullable: true})
-  @Prop()
-  pathname?: string
-
   @Field(() => Workspace, {nullable: true})
   @Prop({type: MongooseSchema.Types.ObjectId, ref: Workspace.name})
   parentWorkspaceId?: MongooseSchema.Types.ObjectId | Workspace
 
   @Field(() => Folder, {nullable: true})
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: Folder.name})
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: 'Folder'})
   parentFolderId?: MongooseSchema.Types.ObjectId | Folder
 
-  @Field(() => [Folder], { nullable: 'itemsAndList' })
-  @Prop({type: [MongooseSchema.Types.ObjectId], ref: Folder.name})
-  childFoldersIds?: Folder[]
-
-  @Field(() => [Document], { nullable: 'itemsAndList' })
-  @Prop({type: [MongooseSchema.Types.ObjectId], ref: 'Document'})
-  childDocsIds?: MongooseSchema.Types.ObjectId | Document[]
+  @Field(() => [TodoBoard], { nullable: 'itemsAndList' })
+  @Prop({type: [MongooseSchema.Types.ObjectId], ref: TodoBoard.name})
+  childTodoBoardIds?: MongooseSchema.Types.ObjectId[] | TodoBoard[]
 }
 
-export type FolderDocument = Folder & MongoDocument
+export type TodoBoxDocument = TodoBox & MongoDocument
 
-export const FolderSchema = SchemaFactory.createForClass(Folder)
+export const TodoBoxSchema = SchemaFactory.createForClass(TodoBox)

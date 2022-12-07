@@ -2,6 +2,7 @@ import {Field, ObjectType} from "@nestjs/graphql";
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Document as MongoDocument, Schema as MongooseSchema} from "mongoose";
 import {Workspace} from "../workspace/workspace.model";
+import {Folder} from "../folder/folder.model";
 
 @ObjectType()
 @Schema()
@@ -15,19 +16,15 @@ export class Document {
 
   @Field(() => String, { nullable: true })
   @Prop()
-  typeFile?: string
-
-  @Field(() => String, { nullable: true })
-  @Prop()
   folderPathname?: string
 
   @Field(() => Workspace, {nullable: true})
   @Prop({type: MongooseSchema.Types.ObjectId, ref: Workspace.name})
   parentWorkspaceId?: MongooseSchema.Types.ObjectId | Workspace
 
-  @Field(() => String, { nullable: true })
-  @Prop()
-  parentFolderId?: MongooseSchema.Types.ObjectId
+  @Field(() => Folder, {nullable: true})
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: 'Folder'})
+  parentFolderId?: MongooseSchema.Types.ObjectId | Folder
 
   @Field(() => String, { nullable: true })
   @Prop()

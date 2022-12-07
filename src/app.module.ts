@@ -12,13 +12,17 @@ import {Folder, FolderSchema} from "./folder/folder.model";
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { WorkspaceModule } from './workspace/workspace.module';
 import {Document, DocumentSchema} from "./document/document.model";
-
-const url = process.env.MONGO_URL || 'localhost';
+import { TodoBoxModule } from './todo-box/todo-box.module';
+import { TodoBoardModule } from './todo-board/todo-board.module';
+import { TodoCollectionModule } from './todo-collection/todo-collection.module';
+import { TodoTaskModule } from './todo-task/todo-task.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    MongooseModule.forRoot(`mongodb+srv://admin:admin@cluster0.kyuxl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(process.env.MONGODB_URL || 'mongodb://db:27017/MyNote'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
@@ -34,6 +38,10 @@ const url = process.env.MONGO_URL || 'localhost';
     FolderModule,
     DocumentModule,
     WorkspaceModule,
+    TodoBoxModule,
+    TodoBoardModule,
+    TodoCollectionModule,
+    TodoTaskModule,
   ],
   controllers: [AppController],
   providers: [ AppService],

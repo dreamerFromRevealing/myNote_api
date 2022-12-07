@@ -1,7 +1,6 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {Workspace} from "./workspace.model";
 import {WorkspaceService} from "./workspace.service";
-import {Folder} from "../folder/folder.model";
 import {Schema as MongooseSchema} from "mongoose";
 import {CreateWorkspaceInput, ListWorkspacesInput, UpdateWorkspaceInput} from "./workspace.inputs";
 
