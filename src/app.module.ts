@@ -16,6 +16,7 @@ import { TodoBoxModule } from './todo-box/todo-box.module';
 import { TodoBoardModule } from './todo-board/todo-board.module';
 import { TodoCollectionModule } from './todo-collection/todo-collection.module';
 import { TodoTaskModule } from './todo-task/todo-task.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { TodoTaskModule } from './todo-task/todo-task.module';
     TodoBoardModule,
     TodoCollectionModule,
     TodoTaskModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [ AppService],

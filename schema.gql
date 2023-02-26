@@ -70,6 +70,12 @@ type TodoBox {
   childTodoBoardIds: [TodoBoard]
 }
 
+type Project {
+  _id: String
+  title: String
+  parentWorkspaceId: Workspace
+}
+
 type Query {
   workspace(_id: String!): Workspace!
   workspaces(filters: ListWorkspacesInput): [Workspace!]!
@@ -89,6 +95,8 @@ type Query {
   todoCollections(filters: ListTodoCollectionInput): [TodoCollection!]!
   todoTask(_id: String!): TodoTask!
   todoTasks(filters: ListTodoTaskInput): [TodoTask!]!
+  project(_id: String!): Project!
+  projects(filters: ListProjectInput): [Project!]!
 }
 
 input ListWorkspacesInput {
@@ -157,6 +165,12 @@ input ListTodoTaskInput {
   parentTodoCollectionId: String
 }
 
+input ListProjectInput {
+  _id: String
+  title: String
+  parentWorkspaceId: String!
+}
+
 type Mutation {
   createWorkspace(payload: CreateWorkspaceInput!): Workspace!
   updateWorkspace(payload: UpdateWorkspaceInput!): Workspace!
@@ -189,6 +203,9 @@ type Mutation {
   updateTodoTask(payload: UpdateTodoTaskInput!): TodoTask!
   deleteTodoTask(_id: String!): TodoTask!
   updatePositionTodoTask(payload: UpdatePositionArrTodoTasksInput!): [TodoTask!]!
+  createProject(payload: CreateProjectInput!): Project!
+  updateProject(payload: UpdateProjectInput!): Project!
+  deleteProject(_id: String!): Project!
 }
 
 input CreateWorkspaceInput {
@@ -329,4 +346,15 @@ input UpdatePositionTodoTaskInput {
   _id: String!
   position: Float!
   parentTodoCollectionId: String
+}
+
+input CreateProjectInput {
+  title: String!
+  parentWorkspaceId: String!
+}
+
+input UpdateProjectInput {
+  _id: String!
+  title: String
+  parentWorkspaceId: String!
 }
