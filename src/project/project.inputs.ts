@@ -8,6 +8,9 @@ export class CreateProjectInput {
 
   @Field(() => String)
   parentWorkspaceId: MongooseSchema.Types.ObjectId
+
+  @Field(() => String, {nullable: true})
+  parentFolderId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -20,6 +23,9 @@ export class ListProjectInput {
 
   @Field(() => String)
   parentWorkspaceId?: MongooseSchema.Types.ObjectId
+
+  @Field(() => String, {nullable: true})
+  parentFolderId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -32,4 +38,7 @@ export class UpdateProjectInput {
 
   @Field(() => String)
   parentWorkspaceId?: MongooseSchema.Types.ObjectId
+
+  @Field(() => String, {nullable: true})
+  parentFolderId?: MongooseSchema.Types.ObjectId
 }

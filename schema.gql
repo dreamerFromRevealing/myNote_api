@@ -74,6 +74,14 @@ type Project {
   _id: String
   title: String
   parentWorkspaceId: Workspace
+  parentFolderId: Folder
+}
+
+type Logbook {
+  _id: String
+  title: String
+  parentWorkspaceId: Workspace
+  parentProjectId: Project
 }
 
 type Query {
@@ -97,6 +105,8 @@ type Query {
   todoTasks(filters: ListTodoTaskInput): [TodoTask!]!
   project(_id: String!): Project!
   projects(filters: ListProjectInput): [Project!]!
+  logbook(_id: String!): Logbook!
+  logbooks(filters: ListLogbookInput): [Logbook!]!
 }
 
 input ListWorkspacesInput {
@@ -169,6 +179,14 @@ input ListProjectInput {
   _id: String
   title: String
   parentWorkspaceId: String!
+  parentFolderId: String
+}
+
+input ListLogbookInput {
+  _id: String
+  title: String
+  parentProjectId: String
+  parentWorkspaceId: String
 }
 
 type Mutation {
@@ -206,6 +224,9 @@ type Mutation {
   createProject(payload: CreateProjectInput!): Project!
   updateProject(payload: UpdateProjectInput!): Project!
   deleteProject(_id: String!): Project!
+  createLogbook(payload: CreateLogbookInput!): Logbook!
+  updateLogbook(payload: UpdateLogbookInput!): Logbook!
+  deleteLogbook(_id: String!): Logbook!
 }
 
 input CreateWorkspaceInput {
@@ -351,10 +372,25 @@ input UpdatePositionTodoTaskInput {
 input CreateProjectInput {
   title: String!
   parentWorkspaceId: String!
+  parentFolderId: String
 }
 
 input UpdateProjectInput {
   _id: String!
   title: String
   parentWorkspaceId: String!
+  parentFolderId: String
+}
+
+input CreateLogbookInput {
+  title: String!
+  parentProjectId: String!
+  parentWorkspaceId: String!
+}
+
+input UpdateLogbookInput {
+  _id: String!
+  title: String
+  parentProjectId: String
+  parentWorkspaceId: String
 }

@@ -17,6 +17,8 @@ import { TodoBoardModule } from './todo-board/todo-board.module';
 import { TodoCollectionModule } from './todo-collection/todo-collection.module';
 import { TodoTaskModule } from './todo-task/todo-task.module';
 import { ProjectModule } from './project/project.module';
+import { LogbookModule } from './logbook/logbook.module';
+import { LogModule } from './log/log.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { ProjectModule } from './project/project.module';
     TodoCollectionModule,
     TodoTaskModule,
     ProjectModule,
+    LogbookModule,
+    LogModule,
   ],
   controllers: [AppController],
   providers: [ AppService],
