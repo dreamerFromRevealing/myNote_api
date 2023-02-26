@@ -84,6 +84,14 @@ type Logbook {
   parentProjectId: Project
 }
 
+type Log {
+  _id: String!
+  title: String!
+  parentWorkspaceId: Workspace!
+  parentLogbookId: Logbook!
+  content: String
+}
+
 type Query {
   workspace(_id: String!): Workspace!
   workspaces(filters: ListWorkspacesInput): [Workspace!]!
@@ -107,6 +115,8 @@ type Query {
   projects(filters: ListProjectInput): [Project!]!
   logbook(_id: String!): Logbook!
   logbooks(filters: ListLogbookInput): [Logbook!]!
+  log(_id: String!): Logbook!
+  logs(filters: ListLogInput): [Log!]!
 }
 
 input ListWorkspacesInput {
@@ -189,6 +199,14 @@ input ListLogbookInput {
   parentWorkspaceId: String
 }
 
+input ListLogInput {
+  _id: String
+  title: String
+  parentLogbookId: String
+  content: String
+  parentWorkspaceId: String
+}
+
 type Mutation {
   createWorkspace(payload: CreateWorkspaceInput!): Workspace!
   updateWorkspace(payload: UpdateWorkspaceInput!): Workspace!
@@ -227,6 +245,9 @@ type Mutation {
   createLogbook(payload: CreateLogbookInput!): Logbook!
   updateLogbook(payload: UpdateLogbookInput!): Logbook!
   deleteLogbook(_id: String!): Logbook!
+  createLog(payload: CreateLogInput!): Log!
+  updateLog(payload: UpdateLogInput!): Log!
+  deleteLog(_id: String!): Log!
 }
 
 input CreateWorkspaceInput {
@@ -392,5 +413,19 @@ input UpdateLogbookInput {
   _id: String!
   title: String
   parentProjectId: String
+  parentWorkspaceId: String
+}
+
+input CreateLogInput {
+  title: String!
+  parentLogbookId: String!
+  parentWorkspaceId: String!
+}
+
+input UpdateLogInput {
+  _id: String!
+  title: String
+  parentLogbookId: String
+  content: String
   parentWorkspaceId: String
 }
