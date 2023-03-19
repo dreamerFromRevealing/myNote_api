@@ -1,9 +1,6 @@
 import {Field, ObjectType} from "@nestjs/graphql";
 import {Document as MongoDocument, Schema as MongooseSchema} from 'mongoose';
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {Workspace} from "../workspace/workspace.model";
-import {Folder} from "../folder/folder.model";
-import {TodoBoard} from "../todo-board/todo-board.model";
 import {TodoCollection} from "../todo-collection/todo-collection.model";
 
 @ObjectType()

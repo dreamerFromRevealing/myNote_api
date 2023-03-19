@@ -15,10 +15,6 @@ export class Logbook {
   @Prop()
   title?: string
 
-  @Field(() => Workspace, {nullable: true})
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: Workspace.name})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId | Workspace
-
   @Field(() => Project, {nullable: true})
   @Prop({type: MongooseSchema.Types.ObjectId, ref: 'Project'})
   parentProjectId?: MongooseSchema.Types.ObjectId | Project

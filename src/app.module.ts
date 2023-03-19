@@ -19,6 +19,7 @@ import { TodoTaskModule } from './todo-task/todo-task.module';
 import { ProjectModule } from './project/project.module';
 import { LogbookModule } from './logbook/logbook.module';
 import { LogModule } from './log/log.module';
+import { LogbookFolderModule } from './logbook-folder/logbook-folder.module';
 
 @Module({
   imports: [
@@ -40,7 +41,6 @@ import { LogModule } from './log/log.module';
     HobbyModule,
     FolderModule,
     DocumentModule,
-    WorkspaceModule,
     TodoBoxModule,
     TodoBoardModule,
     TodoCollectionModule,
@@ -48,6 +48,7 @@ import { LogModule } from './log/log.module';
     ProjectModule,
     LogbookModule,
     LogModule,
+    LogbookFolderModule,
   ],
   controllers: [AppController],
   providers: [ AppService],

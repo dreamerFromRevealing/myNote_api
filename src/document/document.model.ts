@@ -1,26 +1,26 @@
 import {Field, ObjectType} from "@nestjs/graphql";
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Document as MongoDocument, Schema as MongooseSchema} from "mongoose";
-import {Workspace} from "../workspace/workspace.model";
 import {Folder} from "../folder/folder.model";
+import {Project} from "../project/project.model";
 
 @ObjectType()
 @Schema()
 export class Document {
-  @Field(() => String, { nullable: true })
-  _id?: MongooseSchema.Types.ObjectId
+  @Field(() => String)
+  _id: MongooseSchema.Types.ObjectId
 
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   @Prop()
-  title?: string
+  title: string
 
   @Field(() => String, { nullable: true })
   @Prop()
   folderPathname?: string
 
-  @Field(() => Workspace, {nullable: true})
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: Workspace.name})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId | Workspace
+  @Field(() => Project)
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: Project.name})
+  parentProjectId: MongooseSchema.Types.ObjectId | Project
 
   @Field(() => Folder, {nullable: true})
   @Prop({type: MongooseSchema.Types.ObjectId, ref: 'Folder'})

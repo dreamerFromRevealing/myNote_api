@@ -8,6 +8,9 @@ export class CreateTodoBoardInput {
 
   @Field(() => String)
   parentTodoBoxId: MongooseSchema.Types.ObjectId
+
+  @Field(() => String)
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -25,7 +28,7 @@ export class ListTodoBoardInput {
   childrenTodoCollectionIds?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -43,5 +46,5 @@ export class UpdateTodoBoardInput {
   childrenTodoCollectionIds?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }

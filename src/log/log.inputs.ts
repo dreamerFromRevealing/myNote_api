@@ -7,10 +7,10 @@ export class CreateLogInput {
   title: string
 
   @Field(() => String)
-  parentLogbookId: string
+  parentLogbookFolderId: string
 
   @Field(() => String)
-  parentWorkspaceId: MongooseSchema.Types.ObjectId
+  parentProjectId: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -22,13 +22,13 @@ export class ListLogInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  parentLogbookId?: string
+  parentLogbookFolderId?: string
 
   @Field(() => String, {nullable: true})
   content?: string
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -40,11 +40,11 @@ export class UpdateLogInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  parentLogbookId?: string
+  parentLogbookFolderId?: string
 
   @Field(() => String, {nullable: true})
   content?: string
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }

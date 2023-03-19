@@ -9,7 +9,7 @@ import {CreateLogInput, ListLogInput, UpdateLogInput} from "./log.inputs";
 export class LogResolver {
   constructor(private logService: LogService) {}
 
-  @Query(() => Logbook)
+  @Query(() => Log)
   async log(@Args('_id', {type: () => String}) _id: MongooseSchema.Types.ObjectId) {
     return this.logService.getById(_id)
   }

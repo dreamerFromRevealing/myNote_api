@@ -10,7 +10,7 @@ export class CreateDocumentInput {
   parentFolderId?: string
 
   @Field(() => String)
-  parentWorkspaceId: MongooseSchema.Types.ObjectId
+  parentProjectId: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -28,7 +28,7 @@ export class ListDocumentInput {
   content?: string
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -46,7 +46,7 @@ export class UpdateDocumentInput {
   content?: string
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }
 
 

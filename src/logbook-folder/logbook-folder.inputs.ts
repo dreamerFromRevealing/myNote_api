@@ -2,16 +2,22 @@ import {Field, InputType} from "@nestjs/graphql";
 import {Schema as MongooseSchema} from 'mongoose';
 
 @InputType()
-export class CreateLogbookInput {
+export class CreateLogbookFolderInput {
   @Field(() => String)
   title: string
 
   @Field(() => String)
-  parentProjectId: string
+  parentLogbookId: string
+
+  @Field(() => String)
+  parentProjectId?: MongooseSchema.Types.ObjectId
+
+
 }
 
+
 @InputType()
-export class ListLogbookInput {
+export class ListLogbookFolderInput {
   @Field(() => String, {nullable: true})
   _id?: MongooseSchema.Types.ObjectId
 
@@ -19,11 +25,14 @@ export class ListLogbookInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  parentProjectId?: string
+  parentLogbookId?: string
+
+  @Field(() => String, {nullable: true})
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
-export class UpdateLogbookInput {
+export class UpdateLogbookFolderInput {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId
 
@@ -31,5 +40,8 @@ export class UpdateLogbookInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  parentProjectId?: string
+  parentLogbookId?: string
+
+  @Field(() => String, {nullable: true})
+  parentProjectId?: MongooseSchema.Types.ObjectId
 }

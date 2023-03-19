@@ -7,11 +7,17 @@ type Workspace {
   title: String
 }
 
-type Document {
+type Project {
   _id: String
   title: String
-  folderPathname: String
   parentWorkspaceId: Workspace
+}
+
+type Document {
+  _id: String!
+  title: String!
+  folderPathname: String
+  parentProjectId: Project!
   parentFolderId: Folder
   content: String
 }
@@ -20,7 +26,7 @@ type Folder {
   _id: String
   title: String
   pathname: String
-  parentWorkspaceId: Workspace
+  parentProjectId: Project!
   parentFolderId: Folder
   childFoldersIds: [Folder]
   childDocsIds: [Document]
@@ -57,7 +63,7 @@ type TodoCollection {
 type TodoBoard {
   _id: String
   title: String
-  parentWorkspaceId: Workspace
+  parentProjectId: Project!
   parentTodoBoxId: TodoBox
   childrenTodoCollectionIds: TodoCollection
 }
@@ -65,30 +71,29 @@ type TodoBoard {
 type TodoBox {
   _id: String
   title: String
-  parentWorkspaceId: Workspace
+  parentProjectId: Project!
   parentFolderId: Folder
   childTodoBoardIds: [TodoBoard]
-}
-
-type Project {
-  _id: String
-  title: String
-  parentWorkspaceId: Workspace
-  parentFolderId: Folder
 }
 
 type Logbook {
   _id: String
   title: String
-  parentWorkspaceId: Workspace
+  parentProjectId: Project
+}
+
+type LogbookFolder {
+  _id: String
+  title: String
+  parentLogbookId: Logbook!
   parentProjectId: Project
 }
 
 type Log {
   _id: String!
   title: String!
-  parentWorkspaceId: Workspace!
-  parentLogbookId: Logbook!
+  parentProjectId: Project!
+  parentLogbookFolderId: LogbookFolder!
   content: String
 }
 
@@ -115,8 +120,10 @@ type Query {
   projects(filters: ListProjectInput): [Project!]!
   logbook(_id: String!): Logbook!
   logbooks(filters: ListLogbookInput): [Logbook!]!
-  log(_id: String!): Logbook!
+  log(_id: String!): Log!
   logs(filters: ListLogInput): [Log!]!
+  logbookFolder(_id: String!): LogbookFolder!
+  logbookFolders(filters: ListLogbookFolderInput): [LogbookFolder!]!
 }
 
 input ListWorkspacesInput {
@@ -129,7 +136,7 @@ input ListDocumentInput {
   title: String
   folderPathname: String
   content: String
-  parentWorkspaceId: String
+  parentProjectId: String
 }
 
 input ListFolderInput {
@@ -137,7 +144,7 @@ input ListFolderInput {
   title: String
   pathname: String
   childFoldersIds: String
-  parentWorkspaceId: String
+  parentProjectId: String
   childDocsIds: String
 }
 
@@ -155,7 +162,7 @@ input ListHobbyInput {
 input ListTodoBoxInput {
   _id: String
   title: String
-  parentWorkspaceId: String
+  parentProjectId: String
   parentFolderId: String
   childTodoBoardIds: String
 }
@@ -165,7 +172,7 @@ input ListTodoBoardInput {
   title: String
   parentTodoBoxId: String
   childrenTodoCollectionIds: String
-  parentWorkspaceId: String
+  parentProjectId: String
 }
 
 input ListTodoCollectionInput {
@@ -189,22 +196,27 @@ input ListProjectInput {
   _id: String
   title: String
   parentWorkspaceId: String!
-  parentFolderId: String
 }
 
 input ListLogbookInput {
   _id: String
   title: String
   parentProjectId: String
-  parentWorkspaceId: String
 }
 
 input ListLogInput {
   _id: String
   title: String
-  parentLogbookId: String
+  parentLogbookFolderId: String
   content: String
-  parentWorkspaceId: String
+  parentProjectId: String
+}
+
+input ListLogbookFolderInput {
+  _id: String
+  title: String
+  parentLogbookId: String
+  parentProjectId: String
 }
 
 type Mutation {
@@ -248,6 +260,9 @@ type Mutation {
   createLog(payload: CreateLogInput!): Log!
   updateLog(payload: UpdateLogInput!): Log!
   deleteLog(_id: String!): Log!
+  createLogbookFolder(payload: CreateLogbookFolderInput!): LogbookFolder!
+  updateLogbookFolder(payload: UpdateLogbookFolderInput!): LogbookFolder!
+  deleteLogbookFolder(_id: String!): LogbookFolder!
 }
 
 input CreateWorkspaceInput {
@@ -262,7 +277,7 @@ input UpdateWorkspaceInput {
 input CreateDocumentInput {
   title: String!
   parentFolderId: String
-  parentWorkspaceId: String!
+  parentProjectId: String!
 }
 
 input UpdateDocumentInput {
@@ -270,7 +285,7 @@ input UpdateDocumentInput {
   title: String
   folderPathname: String
   content: String
-  parentWorkspaceId: String
+  parentProjectId: String
 }
 
 input ChangeParentIdInput {
@@ -281,7 +296,7 @@ input ChangeParentIdInput {
 input CreateFolderInput {
   title: String!
   parentFolderId: String
-  parentWorkspaceId: String!
+  parentProjectId: String!
 }
 
 input UpdateFolderInput {
@@ -290,7 +305,7 @@ input UpdateFolderInput {
   pathname: String
   childFoldersIds: String
   childDocsIds: String
-  parentWorkspaceId: String
+  parentProjectId: String
 }
 
 input CreatePersonInput {
@@ -316,13 +331,13 @@ input UpdateHobbyInput {
 input CreateTodoBoxInput {
   title: String!
   parentFolderId: String
-  parentWorkspaceId: String!
+  parentProjectId: String!
 }
 
 input UpdateTodoBoxInput {
   _id: String!
   title: String
-  parentWorkspaceId: String
+  parentProjectId: String
   parentFolderId: String
   childTodoBoardIds: String
 }
@@ -330,6 +345,7 @@ input UpdateTodoBoxInput {
 input CreateTodoBoardInput {
   title: String!
   parentTodoBoxId: String!
+  parentProjectId: String!
 }
 
 input UpdateTodoBoardInput {
@@ -337,7 +353,7 @@ input UpdateTodoBoardInput {
   title: String
   parentTodoBoxId: String
   childrenTodoCollectionIds: String
-  parentWorkspaceId: String
+  parentProjectId: String
 }
 
 input CreateTodoCollectionInput {
@@ -393,39 +409,48 @@ input UpdatePositionTodoTaskInput {
 input CreateProjectInput {
   title: String!
   parentWorkspaceId: String!
-  parentFolderId: String
 }
 
 input UpdateProjectInput {
   _id: String!
   title: String
-  parentWorkspaceId: String!
-  parentFolderId: String
+  parentWorkspaceId: String
 }
 
 input CreateLogbookInput {
   title: String!
   parentProjectId: String!
-  parentWorkspaceId: String!
 }
 
 input UpdateLogbookInput {
   _id: String!
   title: String
   parentProjectId: String
-  parentWorkspaceId: String
 }
 
 input CreateLogInput {
   title: String!
-  parentLogbookId: String!
-  parentWorkspaceId: String!
+  parentLogbookFolderId: String!
+  parentProjectId: String!
 }
 
 input UpdateLogInput {
   _id: String!
   title: String
-  parentLogbookId: String
+  parentLogbookFolderId: String
   content: String
-  parentWorkspaceId: String
+  parentProjectId: String
+}
+
+input CreateLogbookFolderInput {
+  title: String!
+  parentLogbookId: String!
+  parentProjectId: String!
+}
+
+input UpdateLogbookFolderInput {
+  _id: String!
+  title: String
+  parentLogbookId: String
+  parentProjectId: String
 }
