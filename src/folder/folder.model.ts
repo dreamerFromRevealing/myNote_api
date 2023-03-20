@@ -3,6 +3,7 @@ import {Document as MongoDocument, Schema as MongooseSchema} from 'mongoose';
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Document} from "../document/document.model";
 import {Workspace} from "../workspace/workspace.model";
+import {Project} from "../project/project.model";
 
 @ObjectType()
 @Schema()
@@ -18,9 +19,9 @@ export class Folder {
   @Prop()
   pathname?: string
 
-  @Field(() => Workspace, {nullable: true})
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: Workspace.name})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId | Workspace
+  @Field(() => Project)
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: Project.name})
+  parentProjectId: MongooseSchema.Types.ObjectId | Project
 
   @Field(() => Folder, {nullable: true})
   @Prop({type: MongooseSchema.Types.ObjectId, ref: Folder.name})

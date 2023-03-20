@@ -2,19 +2,19 @@ import {Field, InputType} from "@nestjs/graphql";
 import {Schema as MongooseSchema} from 'mongoose';
 
 @InputType()
-export class CreateDocumentInput {
+export class CreateLogInput {
   @Field(() => String)
   title: string
 
-  @Field(() => String, {nullable: true})
-  parentFolderId?: string
+  @Field(() => String)
+  parentLogbookFolderId: string
 
   @Field(() => String)
   parentProjectId: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
-export class ListDocumentInput {
+export class ListLogInput {
   @Field(() => String, {nullable: true})
   _id?: MongooseSchema.Types.ObjectId
 
@@ -22,7 +22,7 @@ export class ListDocumentInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  folderPathname?: string
+  parentLogbookFolderId?: string
 
   @Field(() => String, {nullable: true})
   content?: string
@@ -32,7 +32,7 @@ export class ListDocumentInput {
 }
 
 @InputType()
-export class UpdateDocumentInput {
+export class UpdateLogInput {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId
 
@@ -40,21 +40,11 @@ export class UpdateDocumentInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  folderPathname?: string
+  parentLogbookFolderId?: string
 
   @Field(() => String, {nullable: true})
   content?: string
 
   @Field(() => String, {nullable: true})
   parentProjectId?: MongooseSchema.Types.ObjectId
-}
-
-
-@InputType()
-export class ChangeParentIdInput {
-  @Field(() => String)
-  _id: MongooseSchema.Types.ObjectId
-
-  @Field(() => String, {nullable: true})
-  newParentId?: MongooseSchema.Types.ObjectId
 }

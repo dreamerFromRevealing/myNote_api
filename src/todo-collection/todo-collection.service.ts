@@ -40,7 +40,7 @@ export class TodoCollectionService {
   }
 
   updatePosition(payload: UpdatePositionArrTodoCollectionsInput) {
-   return payload.arrCollections.map(async (collection: UpdatePositionTodoCollectionInput) => {
+   return payload.todoCollections.map(async (collection: UpdatePositionTodoCollectionInput) => {
       return this.todoCollectionModel
         .findByIdAndUpdate(collection._id, collection, {new: true})
         .exec()

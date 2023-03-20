@@ -17,7 +17,7 @@ export class TodoBoardService {
     const todoBox = await this.todoBoxService.getById(payload.parentTodoBoxId)
     const createdTodoBoard = await new this.todoBoardModel({
       ...payload,
-      parentWorkspaceId: todoBox.parentWorkspaceId
+      parentProjectId: todoBox.parentProjectId
     })
     todoBox.childTodoBoardIds.push(createdTodoBoard._id)
     await todoBox.save()

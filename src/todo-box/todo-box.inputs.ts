@@ -10,7 +10,7 @@ export class CreateTodoBoxInput {
   parentFolderId?: string
 
   @Field(() => String)
-  parentWorkspaceId: MongooseSchema.Types.ObjectId
+  parentProjectId: MongooseSchema.Types.ObjectId
 }
 
 @InputType()
@@ -22,7 +22,7 @@ export class ListTodoBoxInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
   parentFolderId?: MongooseSchema.Types.ObjectId
@@ -40,7 +40,7 @@ export class UpdateTodoBoxInput {
   title?: string
 
   @Field(() => String, {nullable: true})
-  parentWorkspaceId?: MongooseSchema.Types.ObjectId
+  parentProjectId?: MongooseSchema.Types.ObjectId
 
   @Field(() => String, {nullable: true})
   parentFolderId?: MongooseSchema.Types.ObjectId

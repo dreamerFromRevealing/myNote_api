@@ -1,36 +1,32 @@
 import {Field, ObjectType} from "@nestjs/graphql";
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Document as MongoDocument, Schema as MongooseSchema} from "mongoose";
-import {Folder} from "../folder/folder.model";
 import {Project} from "../project/project.model";
+import {LogbookFolder} from "src/logbook-folder/logbook-folder.model";
 
 @ObjectType()
 @Schema()
-export class Document {
+export class Log {
   @Field(() => String)
-  _id: MongooseSchema.Types.ObjectId
+  _id?: MongooseSchema.Types.ObjectId
 
   @Field(() => String)
   @Prop()
-  title: string
-
-  @Field(() => String, { nullable: true })
-  @Prop()
-  folderPathname?: string
+  title?: string
 
   @Field(() => Project)
   @Prop({type: MongooseSchema.Types.ObjectId, ref: Project.name})
   parentProjectId: MongooseSchema.Types.ObjectId | Project
 
-  @Field(() => Folder, {nullable: true})
-  @Prop({type: MongooseSchema.Types.ObjectId, ref: 'Folder'})
-  parentFolderId?: MongooseSchema.Types.ObjectId | Folder
+  @Field(() => LogbookFolder)
+  @Prop({type: MongooseSchema.Types.ObjectId, ref: 'LogbookFolder'})
+  parentLogbookFolderId?: MongooseSchema.Types.ObjectId | LogbookFolder
 
   @Field(() => String, { nullable: true })
   @Prop()
   content?: string
 }
 
-export type DocumentDocument = Document & MongoDocument
+export type LogDocument = Log & MongoDocument
 
-export const DocumentSchema = SchemaFactory.createForClass(Document)
+export const LogSchema = SchemaFactory.createForClass(Log)

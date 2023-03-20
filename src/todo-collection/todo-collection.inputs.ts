@@ -70,6 +70,6 @@ export class UpdatePositionTodoCollectionInput {
 @InputType()
 export class UpdatePositionArrTodoCollectionsInput {
   @Field(() => [UpdatePositionTodoCollectionInput])
-  arrCollections: [UpdatePositionTodoCollectionInput]
+  todoCollections: [UpdatePositionTodoCollectionInput]
 }
 

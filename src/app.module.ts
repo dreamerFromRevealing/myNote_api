@@ -16,6 +16,10 @@ import { TodoBoxModule } from './todo-box/todo-box.module';
 import { TodoBoardModule } from './todo-board/todo-board.module';
 import { TodoCollectionModule } from './todo-collection/todo-collection.module';
 import { TodoTaskModule } from './todo-task/todo-task.module';
+import { ProjectModule } from './project/project.module';
+import { LogbookModule } from './logbook/logbook.module';
+import { LogModule } from './log/log.module';
+import { LogbookFolderModule } from './logbook-folder/logbook-folder.module';
 
 @Module({
   imports: [
@@ -37,11 +41,14 @@ import { TodoTaskModule } from './todo-task/todo-task.module';
     HobbyModule,
     FolderModule,
     DocumentModule,
-    WorkspaceModule,
     TodoBoxModule,
     TodoBoardModule,
     TodoCollectionModule,
     TodoTaskModule,
+    ProjectModule,
+    LogbookModule,
+    LogModule,
+    LogbookFolderModule,
   ],
   controllers: [AppController],
   providers: [ AppService],
